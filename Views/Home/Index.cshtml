@@ -1,0 +1,103 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    body {
+        background-color: #f0f4f8;
+    }
+</style>
+
+<!-- Hero Section -->
+<div style="background-color: #4a6fa5;" class="text-white py-5 mb-5">
+    <div class="container text-center">
+        <h1 class="display-3 fw-bold">My Animal Shelter</h1>
+        <p class="lead mt-3 mb-4">
+            A shelter built with love for animals in need. Browse our animals,
+            adopt a new best friend, or help train them for a better life.
+        </p>
+        <a asp-controller="Animal" asp-action="Index" class="btn btn-light btn-lg">
+            Visit the Shelter
+        </a>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- Info Section -->
+    <div class="row align-items-center mb-5">
+        <div class="col-md-4 border-end text-center py-3">
+            <h2 class="fw-bold" style="color: #4a6fa5;">Adopt</h2>
+            <p class="text-muted">
+                Give a loving animal a forever home. Browse available animals
+                and start your adoption journey today.
+            </p>
+            <a asp-controller="Animal" asp-action="Index" style="background-color: #4a6fa5; border: none;" class="btn text-white">Find a Pet</a>
+        </div>
+
+        <div class="col-md-4 border-end text-center py-3">
+            <h2 class="fw-bold" style="color: #4a6fa5;">Train</h2>
+            <p class="text-muted">
+                Help our animals become their best selves. Training improves
+                their chances of finding a loving home.
+            </p>
+            <a asp-controller="Animal" asp-action="Index" style="background-color: #4a6fa5; border: none;" class="btn text-white">Start Training</a>
+        </div>
+
+        <div class="col-md-4 text-center py-3">
+            <h2 class="fw-bold" style="color: #4a6fa5;">Add</h2>
+            <p class="text-muted">
+                Know an animal that needs a home? Add them to our shelter
+                and help them find their perfect family.
+            </p>
+            <a asp-controller="Animal" asp-action="Add" style="background-color: #4a6fa5; border: none;" class="btn text-white">Add Animal</a>
+        </div>
+    </div>
+
+    <!-- Divider -->
+    <hr class="mb-5" />
+
+    <!-- SOLID Principles Section -->
+    <div class="text-center mb-5">
+        <h4 class="fw-bold mb-4">Built Showcasing the SOLID Principles</h4>
+        <div class="row justify-content-center g-3">
+
+            <div class="col-md-2 col-sm-4">
+                <div class="text-white rounded py-3 px-2" style="background-color: #4a6fa5;">
+                    <h5 class="fw-bold">S</h5>
+                    <small>Single Responsibility</small>
+                </div>
+            </div>
+
+            <div class="col-md-2 col-sm-4">
+                <div class="text-white rounded py-3 px-2" style="background-color: #4a6fa5;">
+                    <h5 class="fw-bold">O</h5>
+                    <small>Open / Closed</small>
+                </div>
+            </div>
+
+            <div class="col-md-2 col-sm-4">
+                <div class="text-white rounded py-3 px-2" style="background-color: #4a6fa5;">
+                    <h5 class="fw-bold">L</h5>
+                    <small>Liskov Substitution</small>
+                </div>
+            </div>
+
+            <div class="col-md-2 col-sm-4">
+                <div class="text-white rounded py-3 px-2" style="background-color: #4a6fa5;">
+                    <h5 class="fw-bold">I</h5>
+                    <small>Interface Segregation</small>
+                </div>
+            </div>
+
+            <div class="col-md-2 col-sm-4">
+                <div class="text-white rounded py-3 px-2" style="background-color: #4a6fa5;">
+                    <h5 class="fw-bold">D</h5>
+                    <small>Dependency Inversion</small>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

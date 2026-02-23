@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Add Animal";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm border-primary" style="max-width: 500px; margin: auto;">
+        <div class="card-header fw-bold text-center bg-primary bg-opacity-10">
+            🐾 Add a New Animal
+        </div>
+        <div class="card-body">
+            <form asp-action="Add" method="post">
+
+                <div class="mb-3">
+                    <label class="form-label">Animal Type</label>
+                    <select class="form-select" name="type" id="animalType" onchange="toggleFields()">
+                        <option value="Dog">Dog</option>
+                        <option value="Cat">Cat</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-control" name="name" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Age</label>
+                    <input type="number" class="form-control" name="age" required />
+                </div>
+
+                <div class="mb-3" id="breedField">
+                    <label class="form-label">Breed</label>
+                    <input type="text" class="form-control" name="breed" />
+                </div>
+
+                <div class="mb-3 d-none" id="indoorField">
+                    <label class="form-label">Indoor Cat?</label>
+                    <select class="form-select" name="isIndoor">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Add Animal</button>
+            </form>
+        </div>
+        <div class="card-footer text-center">
+            <a asp-action="Index" class="btn btn-outline-secondary btn-sm">Back to Shelter</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleFields() {
+        const type = document.getElementById("animalType").value;
+        document.getElementById("breedField").classList.toggle("d-none", type !== "Dog");
+        document.getElementById("indoorField").classList.toggle("d-none", type !== "Cat");
+    }
+</script>

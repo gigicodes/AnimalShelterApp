@@ -1,0 +1,51 @@
+﻿@model AnimalShelterApp.Models.Animal
+@{
+    ViewData["Title"] = "Animal Details";
+}
+
+<div class="container mt-4">
+    @if (TempData["TrainingResult"] != null)
+    {
+        <div class="alert alert-success"><strong>Result: </strong>@TempData["TrainingResult"]</div>
+    }
+    <div class="card shadow-sm border-primary" style="max-width: 500px; margin: auto;">
+        <div class="card-header fw-bold text-center bg-primary bg-opacity-10">
+            @(Model.AnimalType == "Dog" ? "🐕" : "🐈") @Model.Name's Details
+        </div>
+        <div class="card-body">
+            <p><strong>Type:</strong> @Model.AnimalType</p>
+            <p><strong>Name:</strong> @Model.Name</p>
+            <p><strong>Age:</strong> @Model.Age years</p>
+            <p>
+                <strong>Status:</strong>
+                <span class="badge @(Model.IsAdopted ? "bg-success" : "bg-warning text-dark")">
+                    @(Model.IsAdopted ? "Adopted" : "Available")
+                </span>
+            </p>
+
+            @if (Model is AnimalShelterApp.Models.Dog dog)
+            {
+                <p><strong>Breed:</strong> @dog.Breed</p>
+            }
+            @if (Model is AnimalShelterApp.Models.Cat cat)
+            {
+                <p><strong>Indoor Cat:</strong> @(cat.IsIndoor ? "Yes" : "No")</p>
+            }
+        </div>
+        <div class="card-footer d-flex gap-2 justify-content-center">
+            @if (!Model.IsAdopted)
+            {
+                <form asp-action="Adopt" method="post">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <button type="submit" class="btn btn-success btn-sm">Adopt</button>
+                </form>
+            }
+
+            <form asp-action="Train" method="post">
+                <input type="hidden" name="id" value="@Model.Id" />
+                <button type="submit" class="btn btn-outline-secondary btn-sm">Train</button>
+            </form>
+            <a asp-action="Index" class="btn btn-outline-primary btn-sm">Back to Shelter</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+﻿@model List<AnimalShelterApp.Models.Animal>
+@{
+    ViewData["Title"] = "Animal Shelter";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Animal Shelter</h1>
+        <a asp-action="Add" class="btn btn-primary">+ Add Animal</a>
+    </div>
+    <div class="row">
+        @foreach (var animal in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm h-100 @(animal.IsAdopted ? "border-success" : "border-primary")">
+                    <div class="card-header text-center fw-bold">
+                        @(animal.AnimalType == "Dog" ? "🐕" : "🐈") @animal.AnimalType
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">@animal.Name</h5>
+                        <p class="card-text text-muted">Age: @animal.Age years</p>
+
+                        @if (animal is AnimalShelterApp.Models.Dog dog)
+                        {
+                            <p class="card-text">Breed: @dog.Breed</p>
+                        }
+                        @if (animal is AnimalShelterApp.Models.Cat cat)
+                        {
+                            <p class="card-text">Indoor: @(cat.IsIndoor ? "Yes" : "No")</p>
+                        }
+
+                        <span class="badge @(animal.IsAdopted ? "bg-success" : "bg-warning text-dark")">
+                            @(animal.IsAdopted ? "Adopted" : "Available")
+                        </span>
+                    </div>
+                    <div class="card-footer d-flex gap-2">
+                        <a asp-action="Details" asp-route-id="@animal.Id" class="btn btn-outline-primary btn-sm">Details</a>
+
+                        @if (!animal.IsAdopted)
+                        {
+                            <form asp-action="Adopt" method="post">
+                                <input type="hidden" name="id" value="@animal.Id" />
+                                <button type="submit" class="btn btn-success btn-sm">Adopt</button>
+                            </form>
+                        }
+
+                        <form asp-action="Train" method="post">
+                            <input type="hidden" name="id" value="@animal.Id" />
+                            <button type="submit" class="btn btn-outline-secondary btn-sm">Train</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
