@@ -42,6 +42,9 @@ namespace AnimalShelterApp.Services
             {
                 Dog dog => $"{dog.Name} the {dog.Breed} has been trained to sit and stay.",
                 Cat cat => $"{cat.Name} the cat has been trained to use the litter box.",
+                Rabbit rabbit => $"{rabbit.Name} the rabbit has completed training!",
+                Bird bird => $"{bird.Name} the bird has completed training!",
+                Snake snake => $"{snake.Name} the snake doesn't need training",
                 _ => $"{animal.Name} has completed training."
             };
         }

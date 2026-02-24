@@ -10,27 +10,45 @@
     }
     <div class="card shadow-sm border-primary" style="max-width: 500px; margin: auto;">
         <div class="card-header fw-bold text-center bg-primary bg-opacity-10">
-            @(Model.AnimalType == "Dog" ? "🐕" : "🐈") @Model.Name's Details
+            @(Model.AnimalType == "Dog" ? "🐕" :
+              Model.AnimalType == "Cat" ? "🐈" :
+              Model.AnimalType == "Rabbit" ? "🐇" :
+              Model.AnimalType == "Snake" ? "🐍" :
+              Model.AnimalType == "Bird" ? "🐦" : "🐾") @Model.Name's Details
         </div>
         <div class="card-body">
             <p><strong>Type:</strong> @Model.AnimalType</p>
             <p><strong>Name:</strong> @Model.Name</p>
             <p><strong>Age:</strong> @Model.Age years</p>
+            
+            @if (Model is AnimalShelterApp.Models.Dog dog)
+            {
+                <p><strong>Breed:</strong> @dog.Breed</p>
+            }
+            @if (Model is AnimalShelterApp.Models.Rabbit rabbit)
+            {
+                <p><strong>Breed:</strong> @rabbit.Breed</p>
+            }
+            @if (Model is AnimalShelterApp.Models.Cat cat)
+            {
+                <p><strong>Indoor Cat:</strong> @(cat.IsIndoor ? "Yes" : "No")</p>
+            }
+            @if (Model is AnimalShelterApp.Models.Snake snake)
+            {
+                <p><strong>Specie: </strong>@snake.Specie</p>
+                <p><strong>Venomous: </strong>@(snake.IsVenomous ? "Yes" : "No")</p>
+            }
+            @if (Model is AnimalShelterApp.Models.Bird bird)
+            {
+                <p><strong>Variety: </strong>@bird.Variety</p>
+                <p><strong>Can it talk: </strong>@(bird.CanTalk ? "Yes" : "No")</p>
+            }
             <p>
                 <strong>Status:</strong>
                 <span class="badge @(Model.IsAdopted ? "bg-success" : "bg-warning text-dark")">
                     @(Model.IsAdopted ? "Adopted" : "Available")
                 </span>
             </p>
-
-            @if (Model is AnimalShelterApp.Models.Dog dog)
-            {
-                <p><strong>Breed:</strong> @dog.Breed</p>
-            }
-            @if (Model is AnimalShelterApp.Models.Cat cat)
-            {
-                <p><strong>Indoor Cat:</strong> @(cat.IsIndoor ? "Yes" : "No")</p>
-            }
         </div>
         <div class="card-footer d-flex gap-2 justify-content-center">
             @if (!Model.IsAdopted)

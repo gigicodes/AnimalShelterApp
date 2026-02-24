@@ -4,6 +4,6 @@
     {
         public override string AnimalType => "Bird";
         public bool CanTalk { get; set; }
-        public string Breed { get; set; } = string.Empty;
+        public string Variety { get; set; } = string.Empty;
     }
 }

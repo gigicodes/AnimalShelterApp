@@ -44,12 +44,15 @@ namespace AnimalShelterApp.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Add(string name, int age, string type, string? breed, bool? isIndoor)
+        public IActionResult Add(string name, int age, string type, string? breed, bool? isIndoor, bool isVenomous, string specie, string variety, bool canTalk)
         {
             Animal Animal = type.ToLower() switch
             {
                 "dog" => new Dog { Name = name, Age = age, Breed = breed ?? "Unknown", IsAdopted = false },
                 "cat" => new Cat { Name = name, Age = age, IsIndoor = isIndoor ?? true, IsAdopted = false },
+                "rabbit" => new Rabbit { Name = name, Age = age, Breed = breed ?? "Unknown", IsAdopted = false },
+                "snake" => new Snake { Name = name, Age = age, Specie = specie, IsVenomous = isVenomous, IsAdopted = false },
+                "bird" => new Bird { Name = name, Age = age, Variety = variety, CanTalk = canTalk, IsAdopted = false },
                 _ => throw new ArgumentException("Invalid animal type")
             };
             _animalService.AddAnimal(Animal);

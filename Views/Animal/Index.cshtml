@@ -14,7 +14,11 @@
             <div class="col-md-4 mb-4">
                 <div class="card shadow-sm h-100 @(animal.IsAdopted ? "border-success" : "border-primary")">
                     <div class="card-header text-center fw-bold">
-                        @(animal.AnimalType == "Dog" ? "🐕" : "🐈") @animal.AnimalType
+                        @(animal.AnimalType == "Dog" ? "🐕" :
+                          animal.AnimalType == "Cat" ? "🐈" :
+                          animal.AnimalType == "Rabbit" ? "🐇" :
+                          animal.AnimalType == "Snake" ? "🐍" :
+                          animal.AnimalType == "Bird" ? "🐦" : "🐾") @animal.AnimalType
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">@animal.Name</h5>
@@ -24,11 +28,24 @@
                         {
                             <p class="card-text">Breed: @dog.Breed</p>
                         }
+                        @if (animal is AnimalShelterApp.Models.Rabbit rabbit)
+                        {
+                            <p class="card-text">Breed: @rabbit.Breed</p>
+                        }
                         @if (animal is AnimalShelterApp.Models.Cat cat)
                         {
                             <p class="card-text">Indoor: @(cat.IsIndoor ? "Yes" : "No")</p>
                         }
-
+                        @if (animal is AnimalShelterApp.Models.Snake snake)
+                        {
+                            <p class="card-text">Is it venomous: @(snake.IsVenomous ? "Yes" : "No")</p>
+                            <p class="card-text">Specie: @snake.Specie</p>
+                        }
+                        @if (animal is AnimalShelterApp.Models.Bird bird)
+                        {
+                            <p class="card-text">Variety: @bird.Variety</p>
+                            <p class="card-text">Can it talk: @(bird.CanTalk ? "Yes" : "No")</p>
+                        }
                         <span class="badge @(animal.IsAdopted ? "bg-success" : "bg-warning text-dark")">
                             @(animal.IsAdopted ? "Adopted" : "Available")
                         </span>
@@ -36,7 +53,7 @@
                     <div class="card-footer d-flex gap-2">
                         <a asp-action="Details" asp-route-id="@animal.Id" class="btn btn-outline-primary btn-sm">Details</a>
 
-                        @if (!animal.IsAdopted)
+                        @* @if (!animal.IsAdopted)
                         {
                             <form asp-action="Adopt" method="post">
                                 <input type="hidden" name="id" value="@animal.Id" />
@@ -47,7 +64,7 @@
                         <form asp-action="Train" method="post">
                             <input type="hidden" name="id" value="@animal.Id" />
                             <button type="submit" class="btn btn-outline-secondary btn-sm">Train</button>
-                        </form>
+                        </form> *@
                     </div>
                 </div>
             </div>

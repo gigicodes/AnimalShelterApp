@@ -15,6 +15,9 @@
                     <select class="form-select" name="type" id="animalType" onchange="toggleFields()">
                         <option value="Dog">Dog</option>
                         <option value="Cat">Cat</option>
+                        <option value="Rabbit">Rabbit</option>
+                        <option value="Snake">Snake</option>
+                        <option value="Bird">Bird</option>
                     </select>
                 </div>
 
@@ -41,6 +44,30 @@
                     </select>
                 </div>
 
+                <div class="mb-3" id="specieField">
+                    <label class="form-label">Specie</label>
+                    <input type="text" class="form-control" name="specie" />
+                </div>
+                <div class="mb-3 d-none" id="venomousField">
+                    <label class="form-label">Venomous?</label>
+                    <select class="form-select" name="isVenomous">
+                        <option value="false">No</option>
+                        <option value="true">Yes</option>
+                    </select>
+                </div>
+
+                <div class="mb-3" id="varietyField">
+                    <label class="form-label">Variety</label>
+                    <input type="text" class="form-control" name="variety" />
+                </div>
+                <div class="mb-3 d-none" id="talkField">
+                    <label class="form-label">Can Talk?</label>
+                    <select class="form-select" name="canTalk">
+                        <option value="false">No</option>
+                        <option value="true">Yes</option>
+                    </select>
+                </div>
+
                 <button type="submit" class="btn btn-primary w-100">Add Animal</button>
             </form>
         </div>
@@ -53,7 +80,11 @@
 <script>
     function toggleFields() {
         const type = document.getElementById("animalType").value;
-        document.getElementById("breedField").classList.toggle("d-none", type !== "Dog");
+        document.getElementById("breedField").classList.toggle("d-none", type !== "Dog" && type !== "Rabbit");
         document.getElementById("indoorField").classList.toggle("d-none", type !== "Cat");
+        document.getElementById("specieField").classList.toggle("d-none", type !== "Snake");
+        document.getElementById("venomousField").classList.toggle("d-none", type !== "Snake");
+        document.getElementById("varietyField").classList.toggle("d-none", type !== "Bird");
+        document.getElementById("talkField").classList.toggle("d-none", type !== "Bird");
     }
 </script>
