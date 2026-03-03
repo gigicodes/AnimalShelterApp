@@ -6,6 +6,27 @@
     body {
         background-color: #f0f4f8;
     }
+
+    .aotd-card {
+        border: 2px solid #4a6fa5;
+        border-radius: 12px;
+        background: white;
+        transition: transform 0.2s ease;
+    }
+
+        .aotd-card:hover {
+            transform: translateY(-4px);
+        }
+
+    .aotd-badge {
+        background-color: #4a6fa5;
+        color: white;
+        font-size: 0.75rem;
+        padding: 4px 12px;
+        border-radius: 20px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
 </style>
 
 <!-- Hero Section -->
@@ -53,6 +74,71 @@
             <a asp-controller="Animal" asp-action="Add" style="background-color: #4a6fa5; border: none;" class="btn text-white">Add Animal</a>
         </div>
     </div>
+
+    <!-- Divider -->
+    <hr class="mb-5" />
+
+    <!-- Animal of the Day Section -->
+    <div class="text-center mb-4">
+        <span class="aotd-badge">Animal of the Day</span>
+        <h2 class="fw-bold mt-3" style="color: #4a6fa5;">Meet Today's Featured Animal</h2>
+        <p class="text-muted">A randomly selected animal looking for a forever home.</p>
+    </div>
+
+    @if (Model != null)
+    {
+        <div class="aotd-card p-4 shadow-sm mx-auto mb-5" style="max-width: 400px;">
+            <div class="text-center mb-3">
+                <span style="font-size: 4rem;">
+                    @(Model.AnimalType == "Dog" ? "🐕" :
+                                    Model.AnimalType == "Cat" ? "🐈" :
+                                    Model.AnimalType == "Rabbit" ? "🐇" :
+                                    Model.AnimalType == "Snake" ? "🐍" :
+                                    Model.AnimalType == "Bird" ? "🐦" : "🐾")
+            </span>
+        </div>
+        <h4 class="fw-bold text-center">@Model.Name</h4>
+        <p class="text-muted text-center mb-1">@Model.AnimalType &bull; @Model.Age years old</p>
+
+        @if (Model is Dog dog)
+            {
+                <p class="text-center text-muted"><small>Breed: @dog.Breed</small></p>
+            }
+            @if (Model is Cat cat)
+            {
+                <p class="text-center text-muted"><small>Indoor: @(cat.IsIndoor ? "Yes" : "No")</small></p>
+            }
+            @if (Model is Rabbit rabbit)
+            {
+                <p class="text-center text-muted"><small>Breed: @rabbit.Breed</small></p>
+            }
+            @if (Model is Snake snake)
+            {
+                <p class="text-center text-muted"><small>Venomous: @(snake.IsVenomous ? "Yes" : "No")</small></p>
+            }
+            @if (Model is Bird bird)
+            {
+                <p class="text-center text-muted"><small>Can Talk: @(bird.CanTalk ? "Yes" : "No")</small></p>
+            }
+
+            <div class="d-flex gap-2 justify-content-center mt-3">
+                <a asp-controller="Animal" asp-action="Details" asp-route-id="@Model.Id"
+                   class="btn btn-sm text-white" style="background-color: #4a6fa5;">
+                    View Details
+                </a>
+                <form asp-controller="Animal" asp-action="Adopt" method="post">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <button type="submit" class="btn btn-sm btn-success">Adopt Me</button>
+                </form>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="text-center text-muted mb-5">
+            <p>No animals available right now. Check back soon!</p>
+        </div>
+    }
 
     <!-- Divider -->
     <hr class="mb-5" />
